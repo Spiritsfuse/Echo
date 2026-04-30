@@ -1,45 +1,71 @@
-# Echo — Persona-Based AI Chatbot
+# Echo — Persona AI
 
-A production-grade, persona-based AI chatbot built for **Scaler Academy**. Echo allows users to have high-fidelity conversations with three Scaler personalities: **Anshuman Singh**, **Abhimanyu Saxena**, and **Kshitij Mishra**, powered by **Google Gemini 2.5 Flash**.
-
-> "An elite engineer isn't defined by what they know, but by the systems they architect and the outcomes they ship."
+Echo is a production-grade, persona-based AI experience designed to facilitate high-fidelity conversations with elite engineering minds. Built with **Next.js 15**, **Tailwind CSS v4**, and **Google Gemini 2.5 Flash**, Echo provides a seamless, context-aware interface that brings distinct professional personalities to life.
 
 ## 🚀 Live Demo
-[Deployed App Link](https://echo-persona.vercel.app) *(Placeholder — replace with your actual link)*
+
+Experience the live application here:  
+**[https://echo-five-delta.vercel.app/](https://echo-five-delta.vercel.app/)**
+
+---
 
 ## ✨ Key Features
-- **Persona Switching**: Seamlessly toggle between three distinct personas with animated transitions.
-- **Context Awareness**: Each persona maintains its own system prompt and conversation history.
-- **Streaming Experience**: Real-time message streaming powered by Gemini 2.5 Flash.
-- **Suggestion Chips**: Persona-specific quick-start prompts to lower the barrier to entry.
-- **Premium UI/UX**: Built with a "SaaS-first" aesthetic using Framer Motion, Tailwind CSS, and ShadCN UI.
-- **Mobile Responsive**: Fully optimized for all screen sizes.
+
+- **Advanced Persona Architecture**: Toggle between three distinct professional personas, each with its own isolated conversation history and state.
+- **Gemini 2.5 Flash Integration**: Powered by Google's latest high-performance model for near-instant, intelligent responses.
+- **Real-Time Streaming**: Smooth, chunk-based text streaming for a natural conversational feel.
+- **Session-Based Memory**: Conversations are preserved per-persona during your session, allowing you to switch contexts without losing data.
+- **Intelligent Suggestion Chips**: Contextual quick-start prompts tailored to each persona's expertise.
+- **Premium Glassmorphism UI**: A high-fidelity "SaaS-first" aesthetic with Framer Motion animations and a dark-mode optimized design system.
+- **Mobile Responsive**: Fully adaptive layout ensuring a premium experience on desktop, tablet, and mobile.
+
+---
+
+## 📸 Screenshots
+
+### Elegant AI Chat Interface
+The interface features a clean, professional aesthetic with glassmorphic elements and intuitive navigation.
+![Landing Page](./public/docs/screenshots/landing.png)
+
+### Persona: Anshuman Singh
+*Two-time ACM ICPC World Finalist, former Facebook Tech Lead.*  
+Anshuman's persona is characterized by intense product thinking, scalability-first mindset, and a challenging questioning style designed to push engineers to their limits.
+![Anshuman Response](./public/docs/screenshots/anshuman_response.png)
+
+### Persona: Abhimanyu Saxena
+*Co-founder at Scaler & InterviewBit.*  
+Abhimanyu focuses on strategic leadership, the "KCS" (Knowledge, Confidence, Skill) philosophy, and long-term ecosystem growth.
+![Abhimanyu Response](./public/docs/screenshots/abhimanyu_response.png)
+
+### Persona: Kshitij Mishra
+*Senior Instructor at Scaler.*  
+Kshitij emphasizes Low-Level Design (LLD) discipline, SOLID principles, and tactical empathy in technical communication.
+![Kshitij Response](./public/docs/screenshots/kshitij_response.png)
+
+---
 
 ## 🛠️ Tech Stack
+
 - **Framework**: [Next.js 15 (App Router)](https://nextjs.org)
-- **AI Provider**: [Google Gemini 2.5 Flash](https://ai.google.dev/gemini-api)
-- **AI SDK**: [Vercel AI SDK](https://sdk.vercel.ai/docs)
+- **AI Engine**: [Google Gemini 2.5 Flash](https://ai.google.dev/gemini-api)
+- **AI SDK**: [Vercel AI SDK v6](https://sdk.vercel.ai/docs)
 - **Styling**: [Tailwind CSS v4](https://tailwindcss.com), [ShadCN UI](https://ui.shadcn.com)
 - **Animations**: [Framer Motion](https://www.framer.com/motion/)
+- **State Management**: React Context & Custom Hooks
 - **Language**: [TypeScript](https://www.typescriptlang.org)
 
-## 📦 Architecture
-```text
-/src
-  /app
-    /api/chat    -> Streaming Gemini AI API route
-    layout.tsx   -> Global providers & layout
-    page.tsx     -> Main landing & chat interface
-  /components
-    /chat        -> ChatContainer, MessageList, MessageInput, etc.
-    /personas    -> PersonaSwitcher, PersonaCards
-    /ui          -> Reusable ShadCN components
-  /lib
-    /personas    -> Persona definitions & system prompts
-    utils.ts     -> Helper functions
-```
+---
 
-## ⚙️ Setup Instructions
+## 📦 Architecture Overview
+
+- **Frontend**: A highly optimized Next.js client-side application with isolated chat states for multi-persona persistence.
+- **API Pipeline**: A streaming edge function that handles request validation, persona prompt injection, and secure communication with the Gemini API.
+- **Persona System**: A configuration-driven layer that defines system prompts, behavioral constraints, and few-shot examples for each personality.
+- **State Persistence**: Lifted state architecture in `page.tsx` ensuring zero-latency switching between active conversations.
+
+---
+
+## ⚙️ Local Setup
 
 ### 1. Clone the repository
 ```bash
@@ -52,32 +78,29 @@ cd Echo
 npm install
 ```
 
-### 3. Environment Variables
-Create a `.env` file in the root directory and add your Gemini API key:
+### 3. Environment Configuration
+Create a `.env` file in the root directory:
 ```env
-GEMINI_API_KEY=your_gemini_api_key_here
+GEMINI_API_KEY=your_gemini_api_key
 GEMINI_MODEL=gemini-2.5-flash
 ```
 
-### 4. Run the development server
+### 4. Run Development Server
 ```bash
 npm run dev
 ```
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-## 📝 Prompt Engineering
-The system prompts are meticulously crafted using:
-- **Role Priming**: Setting deep context for the persona's background.
-- **Few-Shot Prompting**: Providing examples of tone and style.
-- **Chain-of-Thought**: Instructing the model to reason before answering.
-- **Constraints**: Enforcing brevity, formatting, and personality-specific rules.
-
-Detailed annotations can be found in [prompts.md](prompts.md).
-
-## 📄 Documentation
-- [Assignment Details](Assignment%2001%20—%20Persona-Based%20AI%20Chatbot.md)
-- [System Prompts](prompts.md)
-- [Reflection](reflection.md)
 
 ---
-Built with ❤️ for Scaler Academy.
+
+## 🎯 Assignment Requirements Covered
+
+- [x] **Persona Switching**: Seamless transition between 3 personalities.
+- [x] **Prompt Engineering**: Advanced system prompts with role priming and few-shot examples.
+- [x] **Gemini Integration**: Full migration from OpenAI to Google Gemini 2.5 Flash.
+- [x] **Persistence**: History is maintained across persona switches during a session.
+- [x] **Production UX**: Premium branding, mobile responsiveness, and high-quality animations.
+- [x] **Deployment**: Live on Vercel with custom site identity.
+
+---
+
+Built by **Dhruv Sharma** for **Scaler Academy**.
