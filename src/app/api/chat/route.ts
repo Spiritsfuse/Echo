@@ -1,7 +1,12 @@
-import { google } from '@ai-sdk/google';
+import { createGoogleGenerativeAI } from '@ai-sdk/google';
 import { streamText } from 'ai';
 import { PERSONAS, PersonaId } from '@/lib/personas/config';
 import { z } from 'zod';
+
+// Initialize the Google provider with explicit API key
+const google = createGoogleGenerativeAI({
+  apiKey: process.env.GEMINI_API_KEY,
+});
 
 // Schema for the chat request
 const chatSchema = z.object({
@@ -20,9 +25,11 @@ export async function POST(req: Request) {
     
     // Validate request body
     const { messages, personaId } = chatSchema.parse(body);
+    console.log(`[API] Chat request for persona: ${personaId}`, { messageCount: messages.length });
     
     const persona = PERSONAS[personaId as PersonaId];
     if (!persona) {
+      console.error(`[API] Persona not found: ${personaId}`);
       return new Response('Persona not found', { status: 404 });
     }
 
@@ -34,7 +41,7 @@ export async function POST(req: Request) {
 
     // Initialize Gemini stream
     const streamResult = await streamText({
-      model: google('gemini-2.5-flash') as any,
+      model: google('gemini-2.5-flash'),
       messages: fullMessages as any,
       temperature: 0.7,
     });

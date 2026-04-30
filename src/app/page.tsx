@@ -1,26 +1,46 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
+import { useChat } from '@ai-sdk/react';
 import { PersonaId } from '@/lib/personas/config';
 import { PersonaSwitcher } from '@/components/personas/PersonaSwitcher';
 import { ChatContainer } from '@/components/chat/ChatContainer';
 import { Toaster } from '@/components/ui/sonner';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { BrainCircuit, MessageSquareCode } from 'lucide-react';
-
-import { Message } from '@ai-sdk/react';
 
 export default function Home() {
   const [activePersonaId, setActivePersonaId] = useState<PersonaId>('anshuman');
-  const [personaChats, setPersonaChats] = useState<Record<PersonaId, Message[]>>({
-    anshuman: [],
-    abhimanyu: [],
-    kshitij: [],
+
+  // Initialize separate chat states for each persona to ensure persistence
+  const chatAnshuman = useChat({
+    api: '/api/chat',
+    body: { personaId: 'anshuman' },
+    streamProtocol: 'text',
+    id: 'chat-anshuman',
   });
 
-  const handleMessagesChange = useCallback((id: PersonaId, messages: Message[]) => {
-    setPersonaChats(prev => ({ ...prev, [id]: messages }));
-  }, []);
+  const chatAbhimanyu = useChat({
+    api: '/api/chat',
+    body: { personaId: 'abhimanyu' },
+    streamProtocol: 'text',
+    id: 'chat-abhimanyu',
+  });
+
+  const chatKshitij = useChat({
+    api: '/api/chat',
+    body: { personaId: 'kshitij' },
+    streamProtocol: 'text',
+    id: 'chat-kshitij',
+  });
+
+  const personaChats = {
+    anshuman: chatAnshuman,
+    abhimanyu: chatAbhimanyu,
+    kshitij: chatKshitij,
+  };
+
+  const activeChat = personaChats[activePersonaId];
 
   return (
     <main className="min-h-screen bg-background text-foreground selection:bg-primary/20">
@@ -81,19 +101,21 @@ export default function Home() {
 
           {/* Main Chat Area */}
           <div className="order-1 md:order-2">
-            <motion.div
-              key={activePersonaId}
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.4, ease: "easeOut" }}
-              className="w-full"
-            >
-              <ChatContainer 
-                personaId={activePersonaId} 
-                initialMessages={personaChats[activePersonaId]}
-                onMessagesChange={(messages) => handleMessagesChange(activePersonaId, messages)}
-              />
-            </motion.div>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activePersonaId}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.3, ease: "easeOut" }}
+                className="w-full"
+              >
+                <ChatContainer 
+                  personaId={activePersonaId} 
+                  chatProps={activeChat}
+                />
+              </motion.div>
+            </AnimatePresence>
           </div>
         </div>
       </div>

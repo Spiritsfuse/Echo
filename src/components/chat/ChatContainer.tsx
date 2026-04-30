@@ -1,60 +1,32 @@
 'use client';
 
-import { useChat, Message } from '@ai-sdk/react';
+import { Message } from '@ai-sdk/react';
 import { PersonaId, PERSONAS } from '@/lib/personas/config';
 import { useEffect, useRef } from 'react';
 import { MessageList } from '@/components/chat/MessageList';
 import { MessageInput } from '@/components/chat/MessageInput';
 import { SuggestionChips } from '@/components/chat/SuggestionChips';
-import { toast } from 'sonner';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface ChatContainerProps {
   personaId: PersonaId;
-  initialMessages?: Message[];
-  onMessagesChange?: (messages: Message[]) => void;
+  chatProps: {
+    messages: Message[];
+    input: string;
+    handleInputChange: (e: any) => void;
+    handleSubmit: (e: any) => void;
+    isLoading: boolean;
+    setMessages: (messages: Message[]) => void;
+    append: (message: any) => Promise<string | null | undefined>;
+  };
 }
 
-export function ChatContainer({ personaId, initialMessages, onMessagesChange }: ChatContainerProps) {
+export function ChatContainer({ personaId, chatProps }: ChatContainerProps) {
   const persona = PERSONAS[personaId];
   const scrollRef = useRef<HTMLDivElement>(null);
+  const { messages, input, handleInputChange, handleSubmit, isLoading, append } = chatProps;
 
-  const {
-    messages,
-    input,
-    handleInputChange,
-    handleSubmit,
-    isLoading,
-    setMessages,
-    append
-  } = useChat({
-    api: '/api/chat',
-    initialMessages,
-    body: {
-      personaId: personaId,
-    },
-    streamProtocol: 'text',
-    onFinish: (message) => {
-      // The state updates automatically, but we can trigger a parent sync if needed
-    },
-    onError: (err) => {
-      console.error('Chat Error:', err);
-      toast.error(err.message || 'Failed to send message. Check your API key.');
-    },
-  });
-
-  // Sync messages back to parent whenever they change
-  useEffect(() => {
-    if (onMessagesChange) {
-      onMessagesChange(messages);
-    }
-  }, [messages, onMessagesChange]);
-
-  // Handle persona change: only update messages if they are different
-  // This is handled by the parent re-mounting the component with new initialMessages
-  // But since we want to avoid double-rendering, we just rely on props
-
-  // Auto-scroll to bottom
+  // Auto-scroll to bottom whenever messages change or loading state updates
   useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;

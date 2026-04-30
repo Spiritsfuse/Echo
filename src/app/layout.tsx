@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Echo - Persona AI Chatbot",
+  title: "Echo - Persona AI",
   description: "Chat with the elite minds of Scaler: Anshuman Singh, Abhimanyu Saxena, and Kshitij Mishra. A production-grade AI persona experience.",
 };
 
