@@ -30,7 +30,7 @@ export default function Home() {
             </div>
             <div className="flex flex-col">
               <h1 className="text-xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/60">
-                Persona AI
+                Echo - Persona AI
               </h1>
               <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-[0.2em]">
                 Scaler Edition
@@ -55,14 +55,14 @@ export default function Home() {
             <div className="glass-card p-4 rounded-2xl flex flex-col gap-3">
               <div className="flex items-center gap-2 text-primary">
                 <MessageSquareCode className="h-4 w-4" />
-                <h4 className="text-xs font-bold uppercase tracking-wider">About Project</h4>
+                <h4 className="text-xs font-bold uppercase tracking-wider">Project Vision</h4>
               </div>
               <p className="text-[11px] leading-relaxed text-muted-foreground italic">
                 "An elite engineer isn't defined by what they know, but by the systems they architect and the outcomes they ship."
               </p>
               <div className="pt-2 border-t border-border/20">
                 <p className="text-[9px] text-muted-foreground opacity-50">
-                  Built for Scaler Prompt Engineering Assignment 01.
+                  Built for Scaler Academy.
                 </p>
               </div>
             </div>

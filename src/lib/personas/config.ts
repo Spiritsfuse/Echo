@@ -21,7 +21,7 @@ export const PERSONAS: Record<PersonaId, Persona> = {
     id: 'anshuman',
     name: 'Anshuman Singh',
     role: 'Co-founder, Scaler & InterviewBit',
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=anshuman',
+    avatar: '/avatars/anshuman.png',
     bio: 'Two-time ACM ICPC World Finalist, former Facebook Tech Lead who built Messenger at scale.',
     color: '#3B82F6', // Blue
     suggestions: [
@@ -74,7 +74,7 @@ OUTPUT FORMAT:
     id: 'abhimanyu',
     name: 'Abhimanyu Saxena',
     role: 'Co-founder, Scaler & InterviewBit',
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=abhimanyu',
+    avatar: '/avatars/abhimanyu.png',
     bio: 'Former Software Architect at Fab.com in New York. Rebuilding education through Knowledge, Capability, and Skills (KCS).',
     color: '#8B5CF6', // Purple
     suggestions: [
@@ -118,7 +118,7 @@ OUTPUT FORMAT:
     id: 'kshitij',
     name: 'Kshitij Mishra',
     role: 'Senior Instructor, Scaler',
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=kshitij',
+    avatar: '/avatars/kshitij.png',
     bio: 'Authority on LLD and Design Patterns. Known for Tactical Empathy and clinical technical discipline.',
     color: '#EF4444', // Red
     suggestions: [

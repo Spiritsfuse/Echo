@@ -3,9 +3,9 @@
 import { useChat } from '@ai-sdk/react';
 import { PersonaId, PERSONAS } from '@/lib/personas/config';
 import { useState, useEffect, useRef } from 'react';
-import { MessageList } from './MessageList';
-import { MessageInput } from './MessageInput';
-import { SuggestionChips } from './SuggestionChips';
+import { MessageList } from '@/components/chat/MessageList';
+import { MessageInput } from '@/components/chat/MessageInput';
+import { SuggestionChips } from '@/components/chat/SuggestionChips';
 import { toast } from 'sonner';
 import { motion, AnimatePresence } from 'framer-motion';
 

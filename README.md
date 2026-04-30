@@ -1,6 +1,8 @@
 # Echo — Persona-Based AI Chatbot
 
-A production-grade, persona-based AI chatbot built for the **Scaler Prompt Engineering Assignment**. Echo allows users to have high-fidelity conversations with three Scaler personalities: **Anshuman Singh**, **Abhimanyu Saxena**, and **Kshitij Mishra**, powered by **Google Gemini 2.5 Flash**.
+A production-grade, persona-based AI chatbot built for **Scaler Academy**. Echo allows users to have high-fidelity conversations with three Scaler personalities: **Anshuman Singh**, **Abhimanyu Saxena**, and **Kshitij Mishra**, powered by **Google Gemini 2.5 Flash**.
+
+> "An elite engineer isn't defined by what they know, but by the systems they architect and the outcomes they ship."
 
 ## 🚀 Live Demo
 [Deployed App Link](https://echo-persona.vercel.app) *(Placeholder — replace with your actual link)*
