@@ -29,13 +29,13 @@ export function MessageList({ messages, persona }: MessageListProps) {
             )}
           >
             <div className={cn(
-              "h-8 w-8 rounded-full flex items-center justify-center shrink-0 border",
+              "h-8 w-8 rounded-full flex items-center justify-center shrink-0 border overflow-hidden shadow-sm",
               isUser ? "bg-primary text-primary-foreground border-primary" : "bg-muted border-border"
             )}>
               {isUser ? (
                 <User className="h-4 w-4" />
               ) : (
-                <img src={persona.avatar} alt={persona.name} className="h-6 w-6 rounded-full" />
+                <img src={persona.avatar} alt={persona.name} className="h-full w-full object-cover" />
               )}
             </div>
 

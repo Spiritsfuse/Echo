@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { PersonaId } from '@/lib/personas/config';
 import { PersonaSwitcher } from '@/components/personas/PersonaSwitcher';
 import { ChatContainer } from '@/components/chat/ChatContainer';
@@ -8,8 +8,19 @@ import { Toaster } from '@/components/ui/sonner';
 import { motion } from 'framer-motion';
 import { BrainCircuit, MessageSquareCode } from 'lucide-react';
 
+import { Message } from '@ai-sdk/react';
+
 export default function Home() {
   const [activePersonaId, setActivePersonaId] = useState<PersonaId>('anshuman');
+  const [personaChats, setPersonaChats] = useState<Record<PersonaId, Message[]>>({
+    anshuman: [],
+    abhimanyu: [],
+    kshitij: [],
+  });
+
+  const handleMessagesChange = useCallback((id: PersonaId, messages: Message[]) => {
+    setPersonaChats(prev => ({ ...prev, [id]: messages }));
+  }, []);
 
   return (
     <main className="min-h-screen bg-background text-foreground selection:bg-primary/20">
@@ -77,7 +88,11 @@ export default function Home() {
               transition={{ duration: 0.4, ease: "easeOut" }}
               className="w-full"
             >
-              <ChatContainer personaId={activePersonaId} />
+              <ChatContainer 
+                personaId={activePersonaId} 
+                initialMessages={personaChats[activePersonaId]}
+                onMessagesChange={(messages) => handleMessagesChange(activePersonaId, messages)}
+              />
             </motion.div>
           </div>
         </div>

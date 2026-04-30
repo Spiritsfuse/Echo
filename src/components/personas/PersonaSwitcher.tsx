@@ -28,7 +28,7 @@ export function PersonaSwitcher({ activePersonaId, onPersonaChange }: PersonaSwi
               key={persona.id}
               onClick={() => onPersonaChange(persona.id)}
               className={cn(
-                "relative flex items-center gap-3 p-3 rounded-xl transition-all duration-300 group",
+                "relative flex items-center gap-3 p-3 rounded-xl transition-all duration-300 group cursor-pointer",
                 isActive 
                   ? "bg-primary/10 text-primary shadow-sm" 
                   : "hover:bg-muted/50 text-muted-foreground hover:text-foreground"
@@ -42,10 +42,13 @@ export function PersonaSwitcher({ activePersonaId, onPersonaChange }: PersonaSwi
                 />
               )}
               
-              <Avatar className="h-10 w-10 border border-border/50 group-hover:scale-105 transition-transform">
-                <AvatarImage src={persona.avatar} alt={persona.name} />
-                <AvatarFallback>{persona.name[0]}</AvatarFallback>
-              </Avatar>
+              <div className="h-10 w-10 rounded-full border border-border/50 overflow-hidden shrink-0 group-hover:scale-105 transition-transform">
+                <img 
+                  src={persona.avatar} 
+                  alt={persona.name} 
+                  className="h-full w-full object-cover"
+                />
+              </div>
               
               <div className="flex flex-col items-start text-left overflow-hidden">
                 <span className="font-semibold text-sm truncate w-full">{persona.name}</span>
